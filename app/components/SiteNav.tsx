@@ -13,7 +13,7 @@ const LINKS = [
   { href: "/collections/light", label: "Light" },
   { href: "/collections/kix", label: "Kix" },
   { href: "/compare", label: "Compare" },
-  { href: "/#dealer", label: "Dealers" },
+  { href: "/about", label: "About us" },
 ];
 
 export default function SiteNav() {
