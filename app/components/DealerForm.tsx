@@ -299,6 +299,22 @@ export default function DealerForm({ productName, action }: DealerFormProps) {
             </div>
           </div>
 
+          {/* Honeypot — hidden from real users, bots fill every field */}
+          <div
+            aria-hidden
+            className="absolute left-[-9999px] h-0 w-0 overflow-hidden"
+            tabIndex={-1}
+          >
+            <label htmlFor="website_url">Website URL (leave blank)</label>
+            <input
+              type="text"
+              id="website_url"
+              name="website_url"
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
+
           {/* Consent */}
           <label className="flex items-start gap-3 text-[13px] text-[var(--color-fg-secondary)]">
             <input
@@ -347,7 +363,7 @@ export default function DealerForm({ productName, action }: DealerFormProps) {
             const Icon = item.icon;
             return (
               <div key={item.title}>
-                <div className="flex size-10 items-center justify-center rounded-md bg-[var(--color-bg-section)] text-[var(--color-fg)]">
+                <div className="flex size-10 items-center justify-center rounded-xl bg-[var(--color-bg-section)] text-[var(--color-fg)]">
                   <Icon className="size-5" />
                 </div>
                 <div className="mt-4 text-[14px] font-semibold tracking-tight text-[var(--color-fg)]">
