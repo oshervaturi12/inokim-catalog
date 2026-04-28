@@ -186,7 +186,7 @@ export const products: Product[] = [
     fobFrom: 1190,
     msrpFrom: 3790,
     use3D: true,
-    model3DSrc: "/models/2.png",  // Uncomment when you have a real .glb model
+    // model3DSrc: "/products/2.png",  // Uncomment when you have a real .glb model
     specs: {
       power: [
         { label: "Peak Power", value: "2,600", unit: "W" },

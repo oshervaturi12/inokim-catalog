@@ -159,8 +159,8 @@
 
 /* Apple's premium typographic scale */
 .tracking-display {
-  letter-spacing: -0.045em;
+  letter-spacing: -0.035em;
 }
 .tracking-display-tight {
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
 }

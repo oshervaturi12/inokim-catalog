@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter_Tight } from "next/font/google";
 import SiteNav from "@/app/components/SiteNav";
 import SiteFooter from "@/app/components/SiteFooter";
 import "./globals.css";
 
-const inter = Inter({
+// Inter Tight — closest open-source match to SF Pro Display.
+// Tighter letter-spacing, more refined details vs. Inter, optimized for display sizes.
+const interTight = Inter_Tight({
   subsets: ["latin"],
+  // Only ship weights actually used in components: 400, 500, 600, 700.
+  // Skipping 300/800 saves ~80KB of font weight.
+  weight: ["400", "500", "600", "700"],
   variable: "--font-body",
   display: "swap",
+  // Preload reduces FOUT (flash of unstyled text)
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -27,7 +34,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={interTight.variable}>
       <body className="antialiased">
         <SiteNav />
         <main>{children}</main>

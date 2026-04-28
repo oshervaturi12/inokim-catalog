@@ -1,6 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import {
+  UserIcon,
+  BuildingOfficeIcon,
+  CubeIcon,
+  ChatBubbleLeftRightIcon,
+  CheckCircleIcon,
+  ClockIcon,
+  MapIcon,
+  TruckIcon,
+} from "@heroicons/react/24/outline";
 
 interface DealerFormProps {
   productName: string;
@@ -16,10 +26,19 @@ interface FieldConfig {
   span?: "half" | "full";
 }
 
+type IconType = React.ComponentType<{ className?: string }>;
+
+interface SectionConfig {
+  title: string;
+  icon: IconType;
+  fields: FieldConfig[];
+}
+
 // Field groups with logical sections
-const SECTIONS: { title: string; fields: FieldConfig[] }[] = [
+const SECTIONS: SectionConfig[] = [
   {
     title: "Your details",
+    icon: UserIcon,
     fields: [
       { name: "fullName", label: "Full name", type: "text", required: true },
       { name: "email", label: "Business email", type: "email", required: true },
@@ -28,6 +47,7 @@ const SECTIONS: { title: string; fields: FieldConfig[] }[] = [
   },
   {
     title: "Your business",
+    icon: BuildingOfficeIcon,
     fields: [
       { name: "company", label: "Company name", type: "text", required: true },
       { name: "website", label: "Company website", type: "url" },
@@ -38,6 +58,45 @@ const SECTIONS: { title: string; fields: FieldConfig[] }[] = [
 ];
 
 const UNIT_OPTIONS = ["20", "50", "100", "200+"];
+
+const TRUST_SIGNALS: { icon: IconType; title: string; desc: string }[] = [
+  {
+    icon: ClockIcon,
+    title: "24-hour response",
+    desc: "Our team replies within one business day.",
+  },
+  {
+    icon: MapIcon,
+    title: "Exclusive territories",
+    desc: "One distributor per market. No overlap, no race-to-the-bottom.",
+  },
+  {
+    icon: TruckIcon,
+    title: "Real terms",
+    desc: "MOQ 1 × 20ft container. Lead time 35–45 days from deposit.",
+  },
+];
+
+/* ─── Section header — small icon + label, repeating pattern ─── */
+function SectionHeader({
+  icon: Icon,
+  title,
+  trailing,
+}: {
+  icon: IconType;
+  title: string;
+  trailing?: React.ReactNode;
+}) {
+  return (
+    <div className="flex items-baseline justify-between">
+      <h3 className="flex items-center gap-2.5 text-[14px] font-semibold uppercase tracking-[0.06em] text-[var(--color-fg)]">
+        <Icon className="size-4 text-[var(--color-fg-secondary)]" />
+        <span>{title}</span>
+      </h3>
+      {trailing}
+    </div>
+  );
+}
 
 /* ─── Floating-label input ─── */
 function FloatingInput({
@@ -132,16 +191,8 @@ export default function DealerForm({ productName, action }: DealerFormProps) {
         className="bg-[var(--color-bg)] px-6 py-[120px] text-center"
       >
         <div className="mx-auto max-w-xl">
-          <div className="mx-auto flex size-14 items-center justify-center rounded-sm bg-[var(--color-bg-section)]">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <path
-                d="M5 11L9 15L17 7"
-                stroke="var(--color-link)"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+          <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-[var(--color-bg-section)]">
+            <CheckCircleIcon className="size-7 text-[var(--color-link)]" />
           </div>
           <h2 className="mt-8 text-[clamp(40px,5vw,64px)] font-bold leading-[1.05] tracking-tight">
             Inquiry received.
@@ -156,10 +207,7 @@ export default function DealerForm({ productName, action }: DealerFormProps) {
 
   // ─── Form state ───
   return (
-    <section
-      id="dealer-form"
-      className="bg-[var(--color-bg)] px-6 py-[120px]"
-    >
+    <section id="dealer-form" className="bg-[var(--color-bg)] px-6 py-[120px]">
       <div className="mx-auto max-w-2xl">
         {/* Header — big like Apple's contact pages */}
         <header className="text-center">
@@ -179,16 +227,17 @@ export default function DealerForm({ productName, action }: DealerFormProps) {
           {/* Field sections */}
           {SECTIONS.map((section, sectionIdx) => (
             <div key={section.title}>
-              <div className="flex items-baseline justify-between">
-                <h3 className="text-[14px] font-semibold uppercase tracking-[0.06em] text-[var(--color-fg)]">
-                  {section.title}
-                </h3>
-                {sectionIdx === 0 && (
-                  <span className="text-[12px] text-[var(--color-fg-tertiary)]">
-                    <span className="text-[var(--color-accent)]">*</span> Required
-                  </span>
-                )}
-              </div>
+              <SectionHeader
+                icon={section.icon}
+                title={section.title}
+                trailing={
+                  sectionIdx === 0 ? (
+                    <span className="text-[12px] text-[var(--color-fg-tertiary)]">
+                      <span className="text-[var(--color-accent)]">*</span> Required
+                    </span>
+                  ) : undefined
+                }
+              />
 
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 {section.fields.map((f) => (
@@ -205,10 +254,13 @@ export default function DealerForm({ productName, action }: DealerFormProps) {
 
           {/* Units */}
           <div>
-            <h3 className="text-[14px] font-semibold uppercase tracking-[0.06em] text-[var(--color-fg)]">
-              Estimated initial order
-              <span className="ml-1 text-[var(--color-accent)]">*</span>
-            </h3>
+            <SectionHeader
+              icon={CubeIcon}
+              title="Estimated initial order"
+              trailing={
+                <span className="text-[12px] text-[var(--color-accent)]">*</span>
+              }
+            />
             <div className="mt-5 flex flex-wrap gap-2">
               {UNIT_OPTIONS.map((opt) => {
                 const active = units === opt;
@@ -233,9 +285,10 @@ export default function DealerForm({ productName, action }: DealerFormProps) {
 
           {/* Message */}
           <div>
-            <h3 className="text-[14px] font-semibold uppercase tracking-[0.06em] text-[var(--color-fg)]">
-              Tell us about your market
-            </h3>
+            <SectionHeader
+              icon={ChatBubbleLeftRightIcon}
+              title="Tell us about your market"
+            />
             <div className="mt-5">
               <FloatingInput
                 name="message"
@@ -289,30 +342,23 @@ export default function DealerForm({ productName, action }: DealerFormProps) {
         </form>
 
         {/* Trust signals — Apple puts these AFTER the submit, not before */}
-        <div className="mt-16 grid gap-6 border-t border-[var(--color-border-light)] pt-12 sm:grid-cols-3">
-          {[
-            {
-              title: "24-hour response",
-              desc: "Our team replies within one business day.",
-            },
-            {
-              title: "Exclusive territories",
-              desc: "One distributor per market. No overlap, no race-to-the-bottom.",
-            },
-            {
-              title: "Real terms",
-              desc: "MOQ 1 × 20ft container. Lead time 35–45 days from deposit.",
-            },
-          ].map((item) => (
-            <div key={item.title}>
-              <div className="text-[14px] font-semibold tracking-tight text-[var(--color-fg)]">
-                {item.title}
+        <div className="mt-16 grid gap-8 border-t border-[var(--color-border-light)] pt-12 sm:grid-cols-3">
+          {TRUST_SIGNALS.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div key={item.title}>
+                <div className="flex size-10 items-center justify-center rounded-md bg-[var(--color-bg-section)] text-[var(--color-fg)]">
+                  <Icon className="size-5" />
+                </div>
+                <div className="mt-4 text-[14px] font-semibold tracking-tight text-[var(--color-fg)]">
+                  {item.title}
+                </div>
+                <p className="mt-1.5 text-[13px] leading-relaxed text-[var(--color-fg-secondary)]">
+                  {item.desc}
+                </p>
               </div>
-              <p className="mt-1.5 text-[13px] leading-relaxed text-[var(--color-fg-secondary)]">
-                {item.desc}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
