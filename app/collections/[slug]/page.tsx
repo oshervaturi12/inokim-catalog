@@ -199,16 +199,16 @@ export default async function CollectionPage({ params }: PageProps) {
           </h2>
         </Reveal>
 
-        <div className="mt-12 flex flex-wrap justify-center gap-3">
+        <div className="mt-12 flex flex-wrap justify-center gap-8 md:gap-3">
           {collections
             .filter((c) => c.slug !== slug)
             .map((c, i) => (
               <Reveal key={c.slug} delay={0.05 + i * 0.04}>
                 <Link
                   href={`/collections/${c.slug}`}
-                  className="rounded-full border border-[var(--color-border)] bg-white px-5 py-2.5 text-[14px] text-[var(--color-fg)] transition-colors hover:border-[var(--color-fg)] hover:bg-[var(--color-fg)] hover:text-white"
+                  className="rounded-sm border border-[var(--color-border)] bg-white px-5 py-2.5 text-[14px] text-[var(--color-fg)] transition-colors hover:border-[var(--color-fg)] hover:bg-[var(--color-fg)] hover:text-white"
                 >
-                  {c.label} →
+                  {c.label} 
                 </Link>
               </Reveal>
             ))}

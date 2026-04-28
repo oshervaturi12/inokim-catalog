@@ -230,7 +230,7 @@ export default function PressPage() {
                   href={c.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group block h-full rounded-3xl bg-[var(--color-bg-section)] p-7 transition-colors hover:bg-[var(--color-border-light)] sm:p-8"
+                  className="group block h-full rounded-sm bg-[var(--color-bg-section)] p-7 transition-colors hover:bg-[var(--color-border-light)] sm:p-8"
                 >
                   <div className="flex items-center justify-between">
                     <div className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--color-accent)]">
@@ -338,7 +338,7 @@ export default function PressPage() {
                   <a
                     href={kit.href}
                     download
-                    className="group flex h-full items-start gap-5 rounded-3xl border border-[var(--color-border-light)] bg-[var(--color-bg-section)] p-7 transition-colors hover:border-[var(--color-fg)] sm:p-8"
+                    className="group flex h-full items-start gap-5 rounded-sm border border-[var(--color-border-light)] bg-[var(--color-bg-section)] p-7 transition-colors hover:border-[var(--color-fg)] sm:p-8"
                   >
                     <div className="flex size-12 flex-shrink-0 items-center justify-center rounded-xl bg-white text-[var(--color-fg)]">
                       <Icon className="size-6" />
@@ -435,7 +435,7 @@ export default function PressPage() {
           </div>
 
           <Reveal delay={0.2}>
-            <div className="mt-12 rounded-3xl bg-[var(--color-bg-section)] p-8 sm:mt-16 sm:p-10">
+            <div className="mt-12 rounded-sm bg-[var(--color-bg-section)] p-8 sm:mt-16 sm:p-10">
               <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
                 <div className="min-w-0 flex-1">
                   <div className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[var(--color-fg-secondary)]">
@@ -452,14 +452,14 @@ export default function PressPage() {
                 <div className="flex flex-col gap-3 sm:flex-shrink-0">
                   <a
                     href="mailto:press@inokim.com"
-                    className="flex items-center gap-2 rounded-full bg-[var(--color-link)] px-5 py-2.5 text-[14px] font-medium text-white transition-colors hover:bg-[var(--color-link-hover)]"
+                    className="flex items-center gap-2 rounded-sm bg-[var(--color-link)] px-5 py-2.5 text-[14px] font-medium text-white transition-colors hover:bg-[var(--color-link-hover)]"
                   >
                     <EnvelopeIcon className="size-4" />
                     <span>press@inokim.com</span>
                   </a>
                   <a
                     href="tel:+97233741200"
-                    className="flex items-center gap-2 rounded-full border border-[var(--color-border)] px-5 py-2.5 text-[14px] font-medium text-[var(--color-fg)] transition-colors hover:border-[var(--color-fg)]"
+                    className="flex items-center gap-2 rounded-sm border border-[var(--color-border)] px-5 py-2.5 text-[14px] font-medium text-[var(--color-fg)] transition-colors hover:border-[var(--color-fg)]"
                   >
                     <PhoneIcon className="size-4" />
                     <span>+972 3 374 1200</span>

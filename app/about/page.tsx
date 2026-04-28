@@ -115,9 +115,9 @@ const MILESTONES = [
 /* ─── Real management from inokim.com /about page ─── */
 const MANAGEMENT = [
   {
-    name: "Aviv Ben SHushan",
+    name: "Aviv Ben-Shooshan",
     role: "CEO",
-    linkedin: "https://www.linkedin.com/in/davidboredasahar",
+    linkedin: "https://www.linkedin.com/in/kfir-ben-shooshan-b13266180",
   },
   {
     name: "Kfir Ben-Shooshan",
@@ -335,7 +335,7 @@ export default function AboutPage() {
                     <div className="relative">
                       <div
                         aria-hidden
-                        className="absolute left-[24px] top-2 size-3 rounded-full bg-[var(--color-accent)] sm:left-[82px]"
+                        className="absolute left-[24px] top-7 md:top-2 size-3 rounded-full bg-[var(--color-accent)] sm:left-[82px]"
                       />
                       <div className="text-[clamp(22px,2.5vw,32px)] font-bold leading-tight tracking-tight text-[var(--color-fg)]">
                         {m.year}
