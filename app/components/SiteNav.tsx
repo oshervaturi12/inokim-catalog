@@ -76,7 +76,7 @@ export default function SiteNav() {
       {/* Mobile drawer */}
       {open && (
         <div className="border-t border-[var(--color-border-light)] bg-white md:hidden">
-          <div className="mx-auto flex max-w-5xl flex-col px-6 py-2">
+          <div className="mx-auto flex max-w-5xl flex-col px-6 py-2 z-999">
             {LINKS.map((l) => (
               <Link
                 key={l.href}

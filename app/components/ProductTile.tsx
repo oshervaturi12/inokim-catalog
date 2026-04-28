@@ -55,7 +55,7 @@ export default function ProductTile({
 
   return (
     <article
-      className={`group h-full w-full relative overflow-hidden rounded-3xl transition-transform duration-300 hover:scale-[0.995] ${bgClass} ${
+      className={`group min-h-[500px] h-full w-full relative overflow-hidden rounded-3xl transition-transform duration-300 hover:scale-[0.995] ${bgClass} ${
         fullWidth ? "md:col-span-2" : ""
       }`}
       style={{ aspectRatio: aspect }}
@@ -123,7 +123,7 @@ export default function ProductTile({
       </div>
 
       <div
-        className={`pointer-events-none absolute bottom-12 left-1/2 z-[1] -translate-x-1/2 ${
+        className={`pointer-events-none absolute md:bottom-12 left-1/2 z-[1] -translate-x-1/2 ${
           fullWidth ? "h-[55%] w-[60%]" : "h-[55%] w-[88%]"
         }`}
       >

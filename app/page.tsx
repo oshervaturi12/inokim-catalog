@@ -38,7 +38,7 @@ export default function HomePage() {
         </div>
 
         {/* Hero product image — LCP-optimized */}
-        <div className="relative mx-auto -mt-26 aspect-[16/8] w-full">
+        <div className="relative mx-auto md:-mt-26 aspect-[16/8] w-full">
           <Image
             src="/products/bg.png"
             alt="Inokim OXO Dubai"
@@ -72,7 +72,7 @@ export default function HomePage() {
       </section>
 
       {/* ============ FEATURE BAND — Built Better ============ */}
-      <section className="mx-12 mt-4 overflow-hidden rounded-3xl bg-[var(--color-bg-dark)] px-6 py-20 text-center md:py-28">
+      <section className="mx-4 md:mx-12 mt-4 overflow-hidden mt-4 overflow-hidden rounded-3xl bg-[var(--color-bg-dark)] px-6 py-20 text-center md:py-28">
         <div className="text-xl font-normal tracking-tight text-[var(--color-fg-secondary-on-dark)] md:text-2xl">
           Since 2009.
         </div>
