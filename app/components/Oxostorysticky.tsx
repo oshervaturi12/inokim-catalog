@@ -48,16 +48,19 @@ export default function OxoStorySticky() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Track which feature panel is in the viewport
+  // Track which feature panel is in the viewport (only meaningful on desktop)
   useEffect(() => {
     const panels = containerRef.current?.querySelectorAll<HTMLElement>(
       "[data-feature-index]",
     );
     if (!panels || panels.length === 0) return;
 
+    // Skip the observer entirely on mobile — sticky pinning is disabled there anyway
+    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+    if (!isDesktop) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
-        // Find the entry most centered in the viewport
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
@@ -81,9 +84,36 @@ export default function OxoStorySticky() {
       ref={containerRef}
       className="relative bg-[var(--color-bg-darker)] text-[var(--color-fg-on-dark)]"
     >
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid gap-8 md:grid-cols-2 md:gap-16">
-          {/* ─── Left: sticky 3D scooter ─── */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        {/* Mobile: simple vertical stack with one 3D scooter at the top.
+            Desktop: sticky scooter on left, scrolling features on right. */}
+
+        {/* ─── Mobile: single 3D scooter, then list of features ─── */}
+        <div className="md:hidden">
+          <div className="relative aspect-square w-full max-w-md mx-auto py-12">
+            <Scooter3DLazy toneMode="dark" />
+          </div>
+
+          <div className="space-y-12 pb-20">
+            {FEATURES.map((f, i) => (
+              <div key={i} className="border-t border-white/10 pt-8">
+                <div className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[var(--color-fg-secondary-on-dark)]">
+                  0{i + 1} · {f.eyebrow}
+                </div>
+                <h3 className="mt-3 text-[clamp(28px,5vw,40px)] font-bold leading-[1.1] tracking-tight">
+                  {parseAccent(f.title)}
+                </h3>
+                <p className="mt-4 text-[15px] leading-relaxed text-[var(--color-fg-secondary-on-dark)]">
+                  {f.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ─── Desktop: sticky scooter on left, scrolling panels on right ─── */}
+        <div className="hidden md:grid md:grid-cols-2 md:gap-16">
+          {/* Left: sticky 3D scooter */}
           <div className="relative">
             <div className="sticky top-12 flex h-screen items-center justify-center">
               <div className="relative aspect-square w-full max-w-xl">
@@ -92,7 +122,7 @@ export default function OxoStorySticky() {
             </div>
           </div>
 
-          {/* ─── Right: scrolling feature panels ─── */}
+          {/* Right: scrolling feature panels */}
           <div>
             {FEATURES.map((f, i) => (
               <div

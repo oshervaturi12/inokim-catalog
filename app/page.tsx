@@ -22,10 +22,10 @@ export default function HomePage() {
           Eleven models. Six collections. One distributor per territory.
         </p>
 
-        <div className="mt-6 flex justify-center gap-5 text-base md:text-lg z-50">
+        <div className="mt-6 flex justify-center gap-5 text-base md:text-lg z-40">
           <a
             href="#catalog"
-            className="inline-flex items-center gap-1 text-[var(--color-link)] hover:underline z-50"
+            className="inline-flex items-center gap-1 text-[var(--color-link)] hover:underline z-40"
           >
             Explore the lineup <span aria-hidden>›</span>
           </a>
