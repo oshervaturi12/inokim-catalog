@@ -1,26 +1,166 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ─────────────────────────────────────────
+     Surfaces — Apple-style neutral system
+     ───────────────────────────────────────── */
+  --color-bg: #ffffff;
+  --color-bg-section: #f5f5f7;
+  --color-bg-dark: #161617;
+  --color-bg-darker: #000000;
+
+  /* ─────────────────────────────────────────
+     Text
+     ───────────────────────────────────────── */
+  --color-fg: #1d1d1f;
+  --color-fg-secondary: #6e6e73;
+  --color-fg-tertiary: #86868b;
+  --color-fg-on-dark: #f5f5f7;
+  --color-fg-secondary-on-dark: #a1a1a6;
+
+  /* ─────────────────────────────────────────
+     Borders
+     ───────────────────────────────────────── */
+  --color-border: #d2d2d7;
+  --color-border-light: #e8e8ed;
+
+  /* ─────────────────────────────────────────
+     Brand & action colors
+     Red used SPARINGLY (logo accent only).
+     Blue is the action / link color.
+     ───────────────────────────────────────── */
+  --color-accent: #e63946;
+  --color-link: #0066cc;
+  --color-link-hover: #0077ed;
+  --color-link-on-dark: #2997ff;
+
+  /* ─────────────────────────────────────────
+     Type — `--font-body` is injected by next/font
+     in app/layout.tsx (Inter)
+     ───────────────────────────────────────── */
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ─────────────────────────────────────────
+     Radii — Apple uses generous rounding
+     ───────────────────────────────────────── */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@layer base {
+  html {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family:
+      var(--font-body),
+      -apple-system,
+      BlinkMacSystemFont,
+      "SF Pro Display",
+      "SF Pro Text",
+      system-ui,
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+    a, button {
+    cursor: pointer !important;
+  }
+
+  ::selection {
+    background: var(--color-fg);
+    color: var(--color-bg);
+  }
+
+  /* Apple's signature focus ring (instead of the default ugly one) */
+  *:focus-visible {
+    outline: 2px solid var(--color-link);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Subtle hairline divider used in spec rows */
+.hairline {
+  height: 1px;
+  background: var(--color-border-light);
+}
+
+/* ─────────────────────────────────────────
+   Scroll-reveal animations
+   Add `.reveal` to fade up from 40px.
+   Add `.reveal-image` for stronger entrance with subtle scale.
+   `useScrollReveal` hook adds `.is-revealed` when in view.
+   ───────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1),
+    transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-image {
+  opacity: 0;
+  transform: translateY(60px) scale(0.96);
+  transition:
+    opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1),
+    transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.reveal-image.is-revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-image {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─────────────────────────────────────────
+   Gradient text — used on big hero headlines
+   to give them depth (Apple's signature look)
+   ───────────────────────────────────────── */
+.text-gradient-light {
+  background: linear-gradient(180deg, #1d1d1f 0%, #6e6e73 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-gradient-dark {
+  background: linear-gradient(180deg, #f5f5f7 0%, #a1a1a6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-gradient-accent {
+  background: linear-gradient(135deg, #e63946 0%, #ff6b6b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Apple's premium typographic scale */
+.tracking-display {
+  letter-spacing: -0.045em;
+}
+.tracking-display-tight {
+  letter-spacing: -0.05em;
 }

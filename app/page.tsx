@@ -1,65 +1,125 @@
 import Image from "next/image";
+import ProductTile from "@/app/components/ProductTile";
+import Button from "@/app/components/Button";
+import { products } from "@/app/lib/products";
 
-export default function Home() {
+// Flagship dual-motors get the dark tile treatment.
+const DARK_TILES = new Set(["oxo-dubai", "oxo-carbon"]);
+const FULL_WIDTH_TILES = new Set(["kix"]);
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      {/* ============ HERO ============ */}
+      <section className="bg-[var(--color-bg-section)] px-6 pt-20 text-center md:pt-24">
+        <div className="text-xl font-semibold tracking-tight text-[var(--color-fg)] md:text-2xl">
+          Inokim 2026
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+        <h1 className="mt-1 text-[clamp(40px,7vw,80px)] font-semibold leading-[1.05] tracking-tight text-[var(--color-fg)]">
+          Built better.
+        </h1>
+        <p className="mt-2 text-[clamp(18px,2.4vw,28px)] font-normal tracking-tight text-[var(--color-fg-secondary)]">
+          Eleven models. Six collections. One distributor per territory.
+        </p>
+
+        <div className="mt-6 flex justify-center gap-5 text-base md:text-lg z-50">
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#catalog"
+            className="inline-flex items-center gap-1 text-[var(--color-link)] hover:underline z-50"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            Explore the lineup <span aria-hidden>›</span>
+          </a>
+          <a
+            href="#dealer"
+            className="inline-flex items-center gap-1 text-[var(--color-link)] hover:underline z-40"
+          >
+            Become a dealer <span aria-hidden>›</span>
+          </a>
+        </div>
+
+        {/* Hero product image — LCP-optimized */}
+        <div className="relative mx-auto -mt-26 aspect-[16/8] w-full">
+          <Image
+            src="/products/bg.png"
+            alt="Inokim OXO Dubai"
+            fill
+            className="object-contain object-bottom"
+            sizes="(max-width: 768px) 100vw, 1100px"
+            priority
+            fetchPriority="high"
+          />
+        </div>
+      </section>
+
+      {/* ============ TILE GRID ============ */}
+      <section id="catalog" className="bg-white py-4">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 px-4 md:grid-cols-2">
+          {products.map((p) => (
+            <ProductTile
+              key={p.slug}
+              slug={p.slug}
+              name={p.name}
+              eyebrow={p.collectionLabel}
+              tagline={p.tileTagline ?? p.tagline}
+              imageSrc={p.imageSrc}
+              dark={DARK_TILES.has(p.slug)}
+              fullWidth={FULL_WIDTH_TILES.has(p.slug)}
+              aspect={FULL_WIDTH_TILES.has(p.slug) ? "16/8" : "4/5"}
+               colors={p.colors}  
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          ))}
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* ============ FEATURE BAND — Built Better ============ */}
+      <section className="mx-12 mt-4 overflow-hidden rounded-3xl bg-[var(--color-bg-dark)] px-6 py-20 text-center md:py-28">
+        <div className="text-xl font-normal tracking-tight text-[var(--color-fg-secondary-on-dark)] md:text-2xl">
+          Since 2009.
+        </div>
+        <h2 className="mt-1 text-[clamp(36px,6vw,72px)] font-semibold leading-[1.05] tracking-tight text-[var(--color-fg-on-dark)]">
+          Engineered without<br />compromise.
+        </h2>
+        <p className="mx-auto mt-4 max-w-2xl text-lg text-[var(--color-fg-secondary-on-dark)] md:text-xl">
+          UL 2272, CE, FCC, and RoHS certified. 12-month manufacturer warranty. Five years of spare-parts availability. The same Inokim quality, in eleven distinct expressions.
+        </p>
+
+        {/* Stat row */}
+        <div className="mx-auto mt-10 flex max-w-3xl flex-wrap justify-center gap-x-12 gap-y-6">
+          {[
+            { v: "11", l: "Models" },
+            { v: "6", l: "Collections" },
+            { v: "35–45", l: "Days lead time" },
+            { v: "5 yr", l: "Spare parts" },
+          ].map((s) => (
+            <div key={s.l} className="text-center">
+              <div className="text-4xl font-semibold tracking-tight text-[var(--color-fg-on-dark)] md:text-5xl">
+                {s.v}
+              </div>
+              <div className="mt-1 text-xs font-medium uppercase tracking-wider text-[var(--color-fg-secondary-on-dark)]">
+                {s.l}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ============ DEALER CTA ============ */}
+      <section id="dealer" className="bg-white px-6 py-28 text-center md:py-32">
+        <h2 className="mx-auto max-w-3xl text-[clamp(36px,5vw,56px)] font-semibold leading-[1.05] tracking-tight">
+          Exclusive distributors wanted.
+        </h2>
+        <p className="mx-auto mt-4 max-w-xl text-lg text-[var(--color-fg-secondary)] md:text-xl">
+          One per territory. Global B2B orders open. Reach out for FOB pricing and territory availability.
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <Button href="mailto:sales@inokim.com" variant="primary" size="md">
+            Email sales
+          </Button>
+          <Button href="#catalog" variant="secondary" size="md">
+            Browse catalog
+          </Button>
+        </div>
+      </section>
+    </>
   );
 }
