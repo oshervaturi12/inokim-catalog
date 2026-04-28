@@ -14,6 +14,7 @@ const LINKS = [
   { href: "/collections/kix", label: "Kix" },
   { href: "/compare", label: "Compare" },
   { href: "/about", label: "About us" },
+   { href: "/press", label: "Press" },
 ];
 
 export default function SiteNav() {
