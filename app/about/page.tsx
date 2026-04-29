@@ -136,7 +136,7 @@ const TERMS = [
   { icon: CubeIcon, label: "MOQ", value: "1 × 20ft container" },
   { icon: ClockIcon, label: "Lead time", value: "35–45 days from deposit" },
   { icon: CurrencyDollarIcon, label: "Payment", value: "30% deposit / 70% before shipment" },
-  { icon: GlobeAltIcon, label: "Incoterm", value: "FOB Ningbo (Shanghai port)" },
+  { icon: GlobeAltIcon, label: "Incoterm", value: "FOB China (Shanghai port)" },
 ];
 
 const STATS = [
@@ -394,7 +394,7 @@ export default function AboutPage() {
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-3 text-[clamp(32px,6vw,72px)] font-bold leading-[1.05] tracking-tight">
-                Tel Aviv. Ningbo.
+                Tel Aviv. China.
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
@@ -431,7 +431,7 @@ export default function AboutPage() {
                   Manufacturing
                 </div>
                 <h3 className="mt-2 text-[clamp(28px,3vw,40px)] font-bold tracking-tight">
-                  Ningbo, China
+                   China
                 </h3>
                 <p className="mt-4 text-[14px] leading-relaxed text-[var(--color-fg-secondary-on-dark)] sm:text-[15px]">
                   Our own factory — not a contract assembler. Wheels, batteries, motors, controllers, frames, and final assembly all under one roof. Quality control sits next to the production line, not in an audit office overseas.
