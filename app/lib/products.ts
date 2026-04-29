@@ -46,6 +46,14 @@ export interface Product {
   use3D?: boolean;
   /** Path to a .glb model under /public. Falls back to a primitive scooter if absent. */
   model3DSrc?: string;
+
+  // ─── Coming-soon / unreleased products ─────────────────────
+  /** Mark this product as not-yet-released. Disables Buy/Specs, swaps in a "Notify me" flow. */
+  comingSoon?: boolean;
+  /** Optional release window text shown on coming-soon products, e.g. "Q3 2026" or "Coming Soon" */
+  releaseWindow?: string;
+  /** Short eyebrow or tagline shown on the teaser tile, e.g. "World's first e-bike with CarPlay" */
+  teaser?: string;
 }
 
 export interface ProductFeature {
@@ -76,6 +84,70 @@ export const products: Product[] = [
   // ═══════════════════════════════════════════════
   // DUBAI COLLECTION
   // ═══════════════════════════════════════════════
+
+  // ─── Coming Soon: World's first e-bike with built-in CarPlay ───
+  {
+    slug: "dubai-ebike",
+    name: "DUBAI ebike",
+    collection: "dubai",
+    collectionLabel: "Dubai 2026",
+    tagline: "The world's first e-bike with built-in CarPlay",
+    tileTagline: "World's first e-bike\nwith built-in CarPlay.",
+    headline: "The world's first e-bike with {accent:built-in CarPlay.}",
+    description:
+      "A new category for Inokim. The first e-bike engineered around Apple CarPlay — the dashboard, navigation, and connected experience you know from your car, on two wheels. Coming soon.",
+    imageSrc: "/products/dubai-ebike-teaser.png",
+    variant: "neon",
+    comingSoon: true,
+    releaseWindow: "Coming Soon",
+    teaser: "World's first e-bike with built-in CarPlay",
+    cardSpecs: [
+      { label: "Class", value: "E-Bike" },
+      { label: "CarPlay", value: "Built-in" },
+      { label: "Collection", value: "Dubai" },
+      { label: "Status", value: "Coming Soon" },
+    ],
+    highlights: [
+      { label: "Class", value: "E-Bike" },
+      { label: "CarPlay", value: "Built-in" },
+      { label: "Status", value: "Coming Soon" },
+      { label: "Distribution", value: "B2B Priority" },
+    ],
+    fobFrom: 0,
+    msrpFrom: 0,
+    specs: {
+      power: [],
+      build: [],
+      smart: [
+        { label: "Apple CarPlay", value: "Built-in" },
+        { label: "Class", value: "E-Bike" },
+      ],
+      logistics: [
+        { label: "Status", value: "Coming Soon" },
+        { label: "Distribution", value: "B2B Priority", secondary: "Existing distributors first" },
+      ],
+    },
+    features: [
+      {
+        eyebrow: "A new category",
+        title: "The first {accent:e-bike}\nthat thinks like\nyour iPhone.",
+        description:
+          "Inokim built its name on scooters. The OXO Bike Dubai is our first step into e-bikes — and we're not entering quietly. The world's first e-bike with native Apple CarPlay integration. Navigation, calls, music, all on the dashboard.",
+        theme: "dark",
+        layout: "stacked",
+        parallax: false,
+      },
+      {
+        eyebrow: "For distributors",
+        title: "Be the first\n{accent:to stock it.}",
+        description:
+          "Existing Inokim distributors get priority access to the OXO Bike Dubai. New territory inquiries are open. Limited first production run.",
+        theme: "section",
+        layout: "split",
+      },
+    ],
+  },
+
   {
     slug: "ox-dubai",
     name: "OX Dubai",
@@ -186,7 +258,7 @@ export const products: Product[] = [
     fobFrom: 1190,
     msrpFrom: 3790,
     use3D: true,
-    // model3DSrc: "/products/2.png",  // Uncomment when you have a real .glb model
+    // model3DSrc: "/models/oxo-dubai.glb",  // Uncomment when you have a real .glb model
     specs: {
       power: [
         { label: "Peak Power", value: "2,600", unit: "W" },
@@ -420,7 +492,7 @@ export const products: Product[] = [
     headline: "Daily ready. Fast folding. {accent:Built for the city.}",
     description:
       "Fast folding, front and rear suspension, and the Quick⁴ chassis everyone loves. Hero is the daily-commute spec.",
-    imageSrc: "/products/QUICK-4-INOKIM Colors-1.png",
+    imageSrc: "/products/INSCQ4010206.png",
     variant: "default",
     cardSpecs: [
       { label: "Peak", value: "800W" },
@@ -493,7 +565,7 @@ export const products: Product[] = [
     headline: "Extended range. {accent:70 km} on a single charge.",
     description:
       "The Super takes the Quick⁴ platform and stretches the range to 70 km with a larger 16Ah battery.",
-    imageSrc: "/products/QUICK-4-INOKIM Colors-1.png",
+    imageSrc: "/products/INSCQ4010206.png",
     variant: "default",
     cardSpecs: [
       { label: "Peak", value: "800W" },
@@ -569,7 +641,7 @@ export const products: Product[] = [
     headline: "{accent:CarPlay} built in. The premium commuter.",
     description:
       "The new generation Light³ adds Apple CarPlay, App Store readiness, a wide smart display, and the Ghost Shield system as standard. 12 kg, 35 km/h, all-day commute.",
-    imageSrc: "/products/20001M.png",
+    imageSrc: "/products/light3.png",
     variant: "default",
     cardSpecs: [
       { label: "Peak", value: "600W" },

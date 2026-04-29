@@ -71,9 +71,6 @@
     line-height: 1.5;
     min-height: 100vh;
   }
-    a, button {
-    cursor: pointer !important;
-  }
 
   ::selection {
     background: var(--color-fg);
@@ -86,7 +83,6 @@
     outline-offset: 2px;
     border-radius: 4px;
   }
-
 }
 
 /* Subtle hairline divider used in spec rows */
@@ -159,8 +155,15 @@
 
 /* Apple's premium typographic scale */
 .tracking-display {
-  letter-spacing: -0.035em;
+  letter-spacing: -0.045em;
 }
 .tracking-display-tight {
-  letter-spacing: -0.04em;
+  letter-spacing: -0.05em;
+}
+
+/* Shimmer animation — used on the DUBAI ebike teaser headline */
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
