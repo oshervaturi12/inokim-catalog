@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Scooter3DLazy from "./Scooter3dlazy";
+import Image from "next/image";
 
 const FEATURES = [
   {
@@ -29,6 +29,9 @@ const FEATURES = [
       "GPS tracking, NFC unlock, alarm system. Your scooter is never really alone — even when you walk away.",
   },
 ];
+
+// Path to the OXO Dubai product image (same one used everywhere else for this product)
+const SCOOTER_IMAGE_SRC = "/products/2.png";
 
 function parseAccent(text: string) {
   const parts = text.split(/(\{accent:[^}]+\})/g);
@@ -85,13 +88,20 @@ export default function OxoStorySticky() {
       className="relative bg-[var(--color-bg-darker)] text-[var(--color-fg-on-dark)]"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        {/* Mobile: simple vertical stack with one 3D scooter at the top.
-            Desktop: sticky scooter on left, scrolling features on right. */}
+        {/* Mobile: simple vertical stack with one image at the top.
+            Desktop: sticky image on left, scrolling features on right. */}
 
-        {/* ─── Mobile: single 3D scooter, then list of features ─── */}
+        {/* ─── Mobile: single image, then list of features ─── */}
         <div className="md:hidden">
           <div className="relative aspect-square w-full max-w-md mx-auto py-12">
-            <Scooter3DLazy toneMode="dark" />
+            <Image
+              src={SCOOTER_IMAGE_SRC}
+              alt="OXO Dubai"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 500px"
+              className="object-contain"
+            />
           </div>
 
           <div className="space-y-12 pb-20">
@@ -111,13 +121,19 @@ export default function OxoStorySticky() {
           </div>
         </div>
 
-        {/* ─── Desktop: sticky scooter on left, scrolling panels on right ─── */}
+        {/* ─── Desktop: sticky image on left, scrolling panels on right ─── */}
         <div className="hidden md:grid md:grid-cols-2 md:gap-16">
-          {/* Left: sticky 3D scooter */}
+          {/* Left: sticky image */}
           <div className="relative">
             <div className="sticky top-12 flex h-screen items-center justify-center">
               <div className="relative aspect-square w-full max-w-xl">
-                <Scooter3DLazy toneMode="dark" />
+                <Image
+                  src={SCOOTER_IMAGE_SRC}
+                  alt="OXO Dubai"
+                  fill
+                  sizes="(max-width: 1024px) 50vw, 600px"
+                  className="object-contain"
+                />
               </div>
             </div>
           </div>
