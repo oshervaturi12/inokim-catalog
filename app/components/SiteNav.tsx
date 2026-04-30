@@ -121,7 +121,7 @@ export default function SiteNav() {
               href={CATALOG_PDF_HREF}
               download={CATALOG_PDF_FILENAME}
               onClick={() => setOpen(false)}
-              className="mt-4 mb-2 inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-fg)] px-4 py-3 text-sm font-medium text-white"
+              className="mt-4 mb-2 inline-flex items-center justify-center gap-2 rounded-sm bg-[var(--color-fg)] px-4 py-3 text-sm font-medium text-white"
             >
               <svg
                 width="14"

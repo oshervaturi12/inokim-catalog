@@ -172,6 +172,10 @@ export const products: Product[] = [
       { label: "Range", value: "95 KM" },
       { label: "Battery", value: "60V 21Ah" },
     ],
+        colors: [
+      { name: "Orange", hex: "#FF8C1A" },
+      { name: "Yellow", hex: "#7BC74D" },
+    ],
     fobFrom: 770,
     msrpFrom: 1990,
     fobAll: [770, 870],
@@ -255,9 +259,15 @@ export const products: Product[] = [
       { label: "Range", value: "110 km" },
       { label: "Battery", value: "60V 26Ah" },
     ],
+    colors: [
+      { name: "Orange", hex: "#FF8C1A" },
+      { name: "Yellow", hex: "#7BC74D" },
+    ],
+      
+
     fobFrom: 1190,
     msrpFrom: 3790,
-    use3D: true,
+    use3D: false,
     // model3DSrc: "/models/oxo-dubai.glb",  // Uncomment when you have a real .glb model
     specs: {
       power: [
@@ -348,6 +358,12 @@ export const products: Product[] = [
       { label: "Range", value: "95 km" },
       { label: "Frame", value: "Carbon" },
     ],
+    colors: [
+      { name: "White", hex: "#F5F5F5" },
+      { name: "Orange", hex: "#FF8C1A" },
+      { name: "Black", hex: "#1A1A1A" },
+      { name: "Green", hex: "#7BC74D" },
+    ],
     fobFrom: 990,
     msrpFrom: 2990,
     fobAll: [990, 1090],
@@ -424,6 +440,12 @@ export const products: Product[] = [
       { label: "Top Speed", value: "65 KMH" },
       { label: "Range", value: "110 KM" },
       { label: "Frame", value: "Carbon" },
+    ],
+        colors: [
+      { name: "White", hex: "#F5F5F5" },
+      { name: "Orange", hex: "#FF8C1A" },
+      { name: "Black", hex: "#1A1A1A" },
+      { name: "Green", hex: "#7BC74D" },
     ],
     highlights: [
       { label: "Peak", value: "2,600W" },

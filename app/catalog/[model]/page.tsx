@@ -1,6 +1,4 @@
-
-
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
@@ -22,8 +20,10 @@ interface PageProps {
 const DARK_HERO_SLUGS = new Set(["oxo-dubai", "oxo-carbon"]);
 
 // ─── Static generation ──────────────────────────────────────
+// Coming-soon products have their own dedicated routes (e.g. /catalog/oxo-bike-dubai)
+// so we exclude them here to avoid generating an empty page from this template.
 export function generateStaticParams() {
-  return products.map((p) => ({ model: p.slug }));
+  return products.filter((p) => !p.comingSoon).map((p) => ({ model: p.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -51,6 +51,12 @@ export default async function ProductPage({ params }: PageProps) {
   const product = getProduct(model);
   if (!product) notFound();
 
+  // Coming-soon products are served from dedicated routes, e.g. /catalog/oxo-bike-dubai/page.tsx.
+  // Next gives priority to the static route, but if someone reaches this branch we redirect defensively.
+  if (product.comingSoon) {
+    redirect(`/catalog/${product.slug}`);
+  }
+
   const heroTheme = DARK_HERO_SLUGS.has(product.slug) ? "dark" : "section";
 
   // Subnav sections — only show ones that exist on this page
@@ -68,11 +74,21 @@ export default async function ProductPage({ params }: PageProps) {
     { title: "B2B", specs: product.specs.logistics },
   ].filter((g) => g.specs.length > 0);
 
-  // Related products (same collection first, then others)
+  // Related products: same collection first, then everything else.
+  // Dedupe by slug and exclude both the current product and any coming-soon products
+  // (they have a dedicated route and shouldn't appear in regular tile rows).
   const sameCollection = products.filter(
-    (p) => p.collection === product.collection && p.slug !== product.slug,
+    (p) =>
+      p.collection === product.collection &&
+      p.slug !== product.slug &&
+      !p.comingSoon,
   );
-  const otherProducts = products.filter((p) => p.slug !== product.slug);
+  const otherProducts = products.filter(
+    (p) =>
+      p.slug !== product.slug &&
+      p.collection !== product.collection &&
+      !p.comingSoon,
+  );
   const related = [...sameCollection, ...otherProducts].slice(0, 3);
 
   return (
