@@ -73,6 +73,12 @@ const FEATURED = [
 
 /* ─── Full coverage list — chronological newest-first ─── */
 const COVERAGE = [
+    {
+    date: "August 2026",
+    publication: "Autoevolution",
+    headline: "What?! Apple's CarPlay on E-Scooters and E-Bikes? Inokim Does It First, Again",
+    href: "https://www.autoevolution.com/news/what-the-apple-s-carplay-on-e-scooters-and-e-bikes-inokim-does-it-first-again-269247.html",
+  },
   {
     date: "August 2023",
     publication: "Electric Kicks",
