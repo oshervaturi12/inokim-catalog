@@ -46,6 +46,7 @@ export interface Product {
   use3D?: boolean;
   /** Path to a .glb model under /public. Falls back to a primitive scooter if absent. */
   model3DSrc?: string;
+    svg?: string,
 
   // ─── Coming-soon / unreleased products ─────────────────────
   /** Mark this product as not-yet-released. Disables Buy/Specs, swaps in a "Notify me" flow. */
@@ -156,6 +157,7 @@ export const products: Product[] = [
     tagline: "Single motor · Urban precision",
     tileTagline: "Single motor.\nUrban precision.",
     headline: "Single motor. {accent:Urban precision.}",
+    svg: "/svg/ox.svg",
     description:
       "The Dubai Collection's entry into single-motor performance. Hydraulic brakes front and rear, Ghost Shield smart system included. Available in 48V and 60V.",
     imageSrc: "/products/dubai.png",
@@ -338,6 +340,7 @@ export const products: Product[] = [
     slug: "ox-carbon",
     name: "OX Carbon",
     collection: "carbon",
+    svg: '/svg/ox.svg',
     collectionLabel: "Carbon 2026",
     tagline: "Single motor · Carbon frame",
     tileTagline: "Single motor.\nCarbon frame.",
@@ -508,6 +511,7 @@ export const products: Product[] = [
     slug: "quick4-hero",
     name: "Quick⁴ Hero",
     collection: "quick4",
+      svg: "/svg/Quick.svg",
     collectionLabel: "Quick⁴ 2026",
     tagline: "Built for the city · Daily ready",
     tileTagline: "Daily ready.\nFast folding.",
@@ -581,6 +585,7 @@ export const products: Product[] = [
     slug: "quick4-super",
     name: "Quick⁴ Super",
     collection: "quick4",
+     svg: "/svg/Quick.svg",
     collectionLabel: "Quick⁴ 2026",
     tagline: "Built for the city · Extended range",
     tileTagline: "Extended range.\nSame chassis.",
@@ -657,6 +662,7 @@ export const products: Product[] = [
     slug: "light3",
     name: "Light³",
     collection: "light3",
+        svg: "/svg/light.svg",
     collectionLabel: "Light³ 2026",
     tagline: "Premium commuter · CarPlay built in",
     tileTagline: "CarPlay built in.\nFive colors. 12 kg.",
@@ -747,6 +753,7 @@ export const products: Product[] = [
     slug: "light2",
     name: "Light²",
     collection: "light2",
+    svg: "/svg/light.svg",
     collectionLabel: "Light² 2026",
     tagline: "Smart display · Lightweight frame",
     tileTagline: "Smart display.\nLightweight frame.",
@@ -824,6 +831,7 @@ export const products: Product[] = [
     slug: "kix",
     name: "KIX",
     collection: "kix",
+     svg: "/svg/kix.svg",
     collectionLabel: "Kix 2026",
     tagline: "Entry-level · Bold colors",
     tileTagline: "Entry to the Inokim world.\nFive colors. From $1,190 MSRP.",
@@ -955,6 +963,7 @@ export const collections: Collection[] = [
   },
   {
     slug: "quick4",
+   
     label: "Quick⁴",
     displayName: "Quick⁴ Collection",
     eyebrow: "The Quick⁴ Collection",

@@ -3,6 +3,7 @@ import Link from "next/link";
 import ProductTile from "@/app/components/ProductTile";
 import Button from "@/app/components/Button";
 import { products } from "@/app/lib/products";
+import { Svg } from "@react-three/drei";
 
 const DARK_TILES = new Set(["oxo-dubai", "oxo-carbon"]);
 const FULL_WIDTH_TILES = new Set(["kix"]);
@@ -218,6 +219,7 @@ export default function HomePage() {
               fullWidth={FULL_WIDTH_TILES.has(p.slug)}
               aspect={FULL_WIDTH_TILES.has(p.slug) ? "16/8" : "4/5"}
               colors={p.colors}
+              svg={p.svg}
             />
           ))}
         </div>

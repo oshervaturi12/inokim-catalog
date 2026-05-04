@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import InlineSvg from "./InlineSvg";
 
 interface Color {
   name: string;
@@ -14,6 +15,8 @@ interface ProductTileProps {
   /** Two-line tagline. Use \n for line break. */
   tagline: string;
   imageSrc: string;
+  /** Path to product logo SVG. Rendered as a watermark behind the product. */
+  svg?: string;
   /** Dark background variant for flagship products */
   dark?: boolean;
   /** Spans both columns of the grid */
@@ -36,6 +39,7 @@ export default function ProductTile({
   eyebrow,
   tagline,
   imageSrc,
+  svg,
   dark = false,
   fullWidth = false,
   aspect = "4/5",
@@ -46,6 +50,8 @@ export default function ProductTile({
 }: ProductTileProps) {
   const productHref = `/catalog/${slug}`;
   const finalBuyHref = buyHref ?? productHref;
+
+  console.log(svg)
 
   // ═══════════════════════════════════════════════════════════
   // COMING SOON — cinematic teaser layout
@@ -58,12 +64,12 @@ export default function ProductTile({
         }`}
         style={{ aspectRatio: aspect }}
       >
+        <Link
+          href={productHref}
+          aria-label={`${name} — coming soon, sneak peek`}
+          className="absolute inset-0 z-10"
+        />
 
-          <Link
-    href={`/catalog/${productHref}`}
-    aria-label={`${productHref} — coming soon, sneak peek`}
-    className="absolute inset-0 z-10"
-  />
         {/* Background image — full bleed */}
         <Image
           src={imageSrc}
@@ -96,21 +102,11 @@ export default function ProductTile({
           <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white sm:text-[11px]">
             {releaseWindow}
           </span>
-          <span
-            aria-hidden
-            className="hidden h-3 w-px bg-white/20 sm:block"
-          />
+          <span aria-hidden className="hidden h-3 w-px bg-white/20 sm:block" />
           <span className="hidden text-[10px] font-medium uppercase tracking-[0.06em] text-white/60 sm:block sm:text-[11px]">
             {eyebrow}
           </span>
         </div>
-
-        {/* Whole-tile clickable overlay — sits BELOW action buttons */}
-        <Link
-          href={productHref}
-          aria-label={`${name} — sneak peek`}
-          className="absolute inset-0 z-10"
-        />
 
         {/* Bottom-aligned content */}
         <div className="absolute inset-x-0 bottom-0 z-20 p-6 sm:p-10 md:p-12 lg:p-14">
@@ -141,7 +137,7 @@ export default function ProductTile({
             <div className="relative z-30 mt-5 flex flex-wrap items-center gap-4 sm:mt-7">
               <Link
                 href={`${productHref}#notify`}
-                className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-5 py-2.5 text-[13px] font-medium text-white transition-all hover:bg-[#c12d3b] hover:scale-[1.02] sm:px-6 sm:py-3 sm:text-[14px]"
+                className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-5 py-2.5 text-[13px] font-medium text-white transition-all hover:scale-[1.02] hover:bg-[#c12d3b] sm:px-6 sm:py-3 sm:text-[14px]"
               >
                 <span className="size-1.5 animate-pulse rounded-full bg-white" />
                 <span>Notify me</span>
@@ -166,10 +162,9 @@ export default function ProductTile({
   }
 
   // ═══════════════════════════════════════════════════════════
-  // STANDARD TILE — existing layout
+  // STANDARD TILE — with optional logo watermark
   // ═══════════════════════════════════════════════════════════
 
-  // Color logic
   const bgClass = dark
     ? "bg-[var(--color-bg-dark)]"
     : "bg-[var(--color-bg-section)]";
@@ -186,6 +181,13 @@ export default function ProductTile({
     ? "text-[var(--color-link-on-dark)]"
     : "text-[var(--color-link)]";
 
+  // Watermark color treatment by tile theme.
+  // Dark tile = soft white glow. Light tile = debossed dark tone (like watermarked
+  // stationery) — counter-intuitive, but white-on-cream looks like a sticker.
+  const watermarkStyle = dark
+    ? { color: "#ffffff", opacity: 0.085 }
+    : { color: "#1a1a1a", opacity: 0.055 };
+
   return (
     <article
       className={`group relative h-full w-full overflow-hidden rounded-3xl transition-transform duration-300 hover:scale-[0.995] ${bgClass} ${
@@ -199,6 +201,31 @@ export default function ProductTile({
         aria-label={`${name} — learn more`}
         className="absolute inset-0 z-10"
       />
+
+      {/* ─── LOGO WATERMARK ───
+        Sits in the lower 78% of the tile, behind the product image, in front
+        of the background. The product image (z-[1]) sits IN FRONT of this —
+        the silhouette of the scooter cuts through the logo cleanly.
+
+        Implementation note: we inline the SVG (via InlineSvg) rather than
+        using <img>, because we need `currentColor` to flow through the
+        stroke and `opacity` to apply to the whole mark — both impossible
+        when an SVG is loaded as an image. */}
+      {svg && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 z-[0] -translate-x-1/2 flex items-center justify-center"
+          style={{
+            bottom: "6%",
+            width: "78%",
+            aspectRatio: "1 / 1",
+            color: watermarkStyle.color,
+            opacity: watermarkStyle.opacity,
+          }}
+        >
+          <InlineSvg src={svg} className="h-full w-full" />
+        </div>
+      )}
 
       {/* Top content (z-20, above overlay) */}
       <div className="relative z-20 px-6 pt-12 text-center sm:px-8 sm:pt-14">
@@ -266,7 +293,8 @@ export default function ProductTile({
         )}
       </div>
 
-      {/* Product image — bottom-anchored, pointer-events disabled so the overlay link receives clicks here */}
+      {/* Product image — bottom-anchored, IN FRONT of the watermark.
+        pointer-events disabled so the overlay link (z-10) receives clicks here. */}
       <div
         className={`pointer-events-none absolute bottom-12 left-1/2 z-[1] -translate-x-1/2 ${
           fullWidth ? "h-[55%] w-[60%]" : "h-[55%] w-[88%]"
