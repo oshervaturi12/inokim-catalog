@@ -31,7 +31,7 @@ const FEATURES = [
 ];
 
 // Path to the OXO Dubai product image (same one used everywhere else for this product)
-const SCOOTER_IMAGE_SRC = "/products/2.png";
+const SCOOTER_IMAGE_SRC = "/products/test.png";
 
 function parseAccent(text: string) {
   const parts = text.split(/(\{accent:[^}]+\})/g);

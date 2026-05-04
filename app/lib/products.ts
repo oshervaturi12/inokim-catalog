@@ -158,7 +158,7 @@ export const products: Product[] = [
     headline: "Single motor. {accent:Urban precision.}",
     description:
       "The Dubai Collection's entry into single-motor performance. Hydraulic brakes front and rear, Ghost Shield smart system included. Available in 48V and 60V.",
-    imageSrc: "/products/2.png",
+    imageSrc: "/products/dubai.png",
     variant: "neon",
     cardSpecs: [
       { label: "Peak", value: "1300W" },
@@ -174,7 +174,7 @@ export const products: Product[] = [
     ],
         colors: [
       { name: "Orange", hex: "#FF8C1A" },
-      { name: "Yellow", hex: "#7BC74D" },
+      { name: "Yellow", hex: "#FFFF00" },
     ],
     fobFrom: 770,
     msrpFrom: 1990,
@@ -245,7 +245,7 @@ export const products: Product[] = [
     headline: "Two motors. {accent:2,600 watts} of force. The new flagship.",
     description:
       "The flagship of the 2026 Dubai Collection. 2,600W of peak power, 110 km of range, and the Ghost Shield smart system included as standard.",
-    imageSrc: "/products/2.png",
+    imageSrc: "/products/test.png",
     variant: "neon",
     cardSpecs: [
       { label: "Peak", value: "2600W" },
@@ -261,7 +261,7 @@ export const products: Product[] = [
     ],
     colors: [
       { name: "Orange", hex: "#FF8C1A" },
-      { name: "Yellow", hex: "#7BC74D" },
+      { name: "Yellow", hex: "#FFFF00" },
     ],
       
 
@@ -344,7 +344,7 @@ export const products: Product[] = [
     headline: "Carbon-fiber chassis. {accent:Refined} performance.",
     description:
       "Premium carbon-fiber frame on the proven OX platform. Same hydraulic stopping power and Ghost Shield system, with a lighter, more refined chassis.",
-    imageSrc: "/products/INSCOX010309.png",
+    imageSrc: "/products/carbon.png",
     variant: "premium",
     cardSpecs: [
       { label: "Peak", value: "1300W" },
@@ -433,7 +433,7 @@ export const products: Product[] = [
     headline: "Dual motor in carbon. {accent:The ultimate build.}",
     description:
       "OXO performance in a carbon-fiber chassis. Maximum power, maximum range, refined construction.",
-    imageSrc: "/products/INSCOX010309.png",
+    imageSrc: "/products/carbon.png",
     variant: "premium",
     cardSpecs: [
       { label: "Peak", value: "2600W" },

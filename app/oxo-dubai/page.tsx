@@ -380,12 +380,12 @@ export default function OxoDubaiStoryPage() {
               like?
             </h2>
           </Reveal>
-          <Reveal delay={0.1}>
-            <p className="mx-auto mt-5 max-w-xl text-[15px] text-[var(--color-fg-secondary)] sm:mt-6 sm:text-[19px]">
-              A full week of commuting. Or two days of weekend exploration. Or
-              the entire length of Tel Aviv to Haifa, with battery to spare.
-            </p>
-          </Reveal>
+<Reveal delay={0.1}>
+  <p className="mx-auto mt-5 max-w-xl text-[15px] text-[var(--color-fg-secondary)] sm:mt-6 sm:text-[19px]">
+    A full week of commuting. Or two days of weekend exploration. Or the entire
+    length of Los Angeles to San Francisco, with battery to spare.
+  </p>
+</Reveal>
 
           <Reveal variant="image" delay={0.2}>
             <div className="mt-12 sm:mt-16">
@@ -424,7 +424,7 @@ export default function OxoDubaiStoryPage() {
                   {
                     km: "110 km",
                     label: "Full charge",
-                    desc: "Tel Aviv to Haifa",
+                    desc: "Manhattan end to end",
                   },
                 ].map((s) => (
                   <div
